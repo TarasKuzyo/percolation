@@ -7,7 +7,6 @@
 #include "definitions.h"
 
 
-
 static float colormap[][3][3] = {
     {{0.15, 0.15, 0.15}, 
      {0.90, 0.90, 0.90}, 
@@ -15,18 +14,29 @@ static float colormap[][3][3] = {
     
     {{0.15, 0.15, 0.15}, 
      {0.90, 0.90, 0.90}, 
-     {0.40, 0.20, 0.30}},
+     {0.45, 0.25, 0.30}},
+     
+    {{0.15, 0.15, 0.15}, 
+     {0.90, 0.90, 0.90}, 
+     {0.35, 0.65, 0.15}},
+     
+    {{0.15, 0.15, 0.15}, 
+     {0.90, 0.90, 0.90}, 
+     {0.45, 0.51, 0.18}},
 
 };
 
 void draw_site(cairo_t *cr, double x, double y, double size, int site)
 {
+    /* color shortcut */
+    float (*c)[3][3] = &colormap[0];
+    
     if (site == SITE_BLOCK)
-        cairo_set_source_rgb(cr, colormap[1][0][0], colormap[1][0][1], colormap[1][0][2]);
+        cairo_set_source_rgb(cr, (*c)[0][0], (*c)[0][1], (*c)[0][2]);
     else if (site == SITE_OPEN)
-        cairo_set_source_rgb(cr, colormap[1][1][0], colormap[1][1][1], colormap[1][1][2]);
+        cairo_set_source_rgb(cr, (*c)[1][0], (*c)[1][1], (*c)[1][2]);
     else if (site == SITE_FULL)
-        cairo_set_source_rgb(cr, colormap[1][2][0], colormap[1][2][1], colormap[1][2][2]);
+        cairo_set_source_rgb(cr, (*c)[2][0], (*c)[2][1], (*c)[2][2]);
     /*
     if (site == SITE_BLOCK)
         cairo_set_source_rgb(cr, 0.15, 0.15, 0.15);
