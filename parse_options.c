@@ -35,7 +35,8 @@ void parse_options(int argc, char **argv, args *arg)
                          "           colormap name                        \n"
                          "                                                \n"
                          "       -r, --recursive                          \n"
-                         "           enable recursive flow propagation    \n";
+                         "           enable recursive flow propagation    \n"
+                         "                                                \n";
 
     
     static const struct option long_opts[] = {
@@ -58,18 +59,18 @@ void parse_options(int argc, char **argv, args *arg)
     int recursive_flag = 0;
     int width = 0, height = 0;
     double prob = 0.0;
-    double size = 800.0;    /* default size */
+    double size = 800.0;    /* default image size */
     char filename[STR_BUF_SIZE] = "";
     
     
     /* print usage if no args */
     if (argc == 1)
     {
-        printf("%s\n", usage);
+        printf("%s", usage);
         exit(0);
     }
     
-
+    /* process options */
     while ((opt = getopt_long(argc, argv, options, long_opts, &long_index)) != -1)
     {
         switch (opt)
@@ -123,7 +124,7 @@ void parse_options(int argc, char **argv, args *arg)
         printf("Invalid probability value: %g\n", prob);
         exit(1);
     }
-    
+    /* set default image filename */
     if (strlen(filename) == 0)
         snprintf(filename, STR_BUF_SIZE, "output_%d_%d_%g.png", width, height, prob);
         
@@ -134,3 +135,5 @@ void parse_options(int argc, char **argv, args *arg)
     arg->recursive = recursive_flag;
     strcpy(arg->filename, filename);
 }
+
+

@@ -12,7 +12,6 @@ int main(int argc, char **argv)
     args cmd_args;
     parse_options(argc, argv, &cmd_args);
     
-    
     grid *gd = allocate_grid(cmd_args.width, cmd_args.height);
     run_percolation(gd, cmd_args.prob, cmd_args.recursive);
 

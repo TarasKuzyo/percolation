@@ -1,22 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "definitions.h"
 
-/* frees memory for a 2D matrix with number of rows
-   given by height
- */
-void free_matrix(int **matrix, int height) 
-{
-	int i;
 
-	for (i = 0; i < height; ++i)
-		free(matrix[i]);
-
-	free(matrix);
-}
+static int** allocate_matrix(int width, int height);
+static void   free_matrix(int **matrix, int height);
 
 
-/* allocates a 2D width x height matrix
+/* allocates a (width x height) matrix
    returns a pointer to a matrix on success
    or NULL pointer on memory allocation failure
  */
@@ -31,7 +23,7 @@ int** allocate_matrix(int width, int height)
         
 	for (i = 0; i < height; i++)
 	{
-	    /* alocate memory for rows of data */
+	    /* alocate memory for rows data */
 		if (( matrix[i] = malloc(width * sizeof(int)) ) == NULL)
 		{
 		    /* free already allocated part of matrix */
@@ -44,16 +36,24 @@ int** allocate_matrix(int width, int height)
 }
 
 
-
-/*  Frees memory allocated for the grid    
+/* frees memory for a 2D matrix with the
+   number of its rows given by height
  */
-void free_grid(grid *gd)
+void free_matrix(int **matrix, int height) 
 {
-    free_matrix(gd->cells, gd->height);
-    free(gd);
+	int i;
+
+	for (i = 0; i < height; ++i)
+		free(matrix[i]);
+
+	free(matrix);
 }
 
 
+/* allocates a new grid structure given 
+   its dimensions (width and height)
+   returns NULL if allocation failed 
+ */
 grid* allocate_grid(int width, int height)
 {
     int **cells = allocate_matrix(width, height);
@@ -75,6 +75,17 @@ grid* allocate_grid(int width, int height)
 }
 
 
+/*  frees memory allocated for the grid    
+ */
+void free_grid(grid *gd)
+{
+    free_matrix(gd->cells, gd->height);
+    free(gd);
+}
+
+
+/* saves current grid structure as ascii file
+ */
 void write_grid(const char *filename, grid *gd)
 {
     FILE *fp;
@@ -94,7 +105,6 @@ void write_grid(const char *filename, grid *gd)
 
         fprintf(fp, "\n");
 	}
-    
     
     fclose(fp);
 }

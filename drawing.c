@@ -7,7 +7,7 @@
 #include "definitions.h"
 
 
-static float colormap[][3][3] = {
+static float colormap[4][3][3] = {
     {{0.15, 0.15, 0.15}, 
      {0.90, 0.90, 0.90}, 
      {0.40, 0.40, 0.90}},
@@ -23,9 +23,13 @@ static float colormap[][3][3] = {
     {{0.15, 0.15, 0.15}, 
      {0.90, 0.90, 0.90}, 
      {0.45, 0.51, 0.18}},
-
 };
 
+
+/* darws a single site with cairo 
+   drawing context (cr) as a square
+   given its position, size and value
+ */
 void draw_site(cairo_t *cr, double x, double y, double size, int site)
 {
     /* color shortcut */
@@ -37,14 +41,7 @@ void draw_site(cairo_t *cr, double x, double y, double size, int site)
         cairo_set_source_rgb(cr, (*c)[1][0], (*c)[1][1], (*c)[1][2]);
     else if (site == SITE_FULL)
         cairo_set_source_rgb(cr, (*c)[2][0], (*c)[2][1], (*c)[2][2]);
-    /*
-    if (site == SITE_BLOCK)
-        cairo_set_source_rgb(cr, 0.15, 0.15, 0.15);
-    else if (site == SITE_OPEN)
-        cairo_set_source_rgb(cr, 0.90, 0.90, 0.90);
-    else if (site == SITE_FULL)
-        cairo_set_source_rgb(cr, 0.40, 0.40, 0.90);
-    */
+    
     cairo_rectangle(cr, x, y, size, size);
     cairo_fill_preserve(cr);
                  
@@ -53,29 +50,32 @@ void draw_site(cairo_t *cr, double x, double y, double size, int site)
 }
 
 
-
+/* Takes a filename of the output file, grid structure
+   and maximum image size (width or height)
+   Writes the grid image to the file
+ */
 int create_image(const char *filename, grid *gd, double max_size)
 {
     int i, j; 
     
-    /* image parameters */
-    //double max_size = 1000.0;
-    double border_width = max_size/50.0;
-    
+    /* grid structure aspect ratio */
     double aspect = (double)gd->width / (double)gd->height;
+    /* image parameters */
     double img_width  = (aspect > 1) ? max_size : max_size * aspect;
     double img_height = (aspect < 1) ? max_size : max_size / aspect;
     
     double site_size  = img_width/gd->width;
     double line_width = site_size/50.0;
     
-    /* include border width */
+    /* include border to the image width */
+    double border_width = max_size/50.0;
     img_width  = img_width  + 2 * border_width;
     img_height = img_height + 2 * border_width;
     
     cairo_surface_t *surface;
   	cairo_t *cr;
   	
+  	/* extract an extension from filename */
   	char *ext = strrchr(filename, '.');
     if (!ext) /* no extension */
     {
@@ -106,7 +106,7 @@ int create_image(const char *filename, grid *gd, double max_size)
     cairo_set_line_width(cr, line_width);
     cairo_set_line_join(cr, CAIRO_LINE_JOIN_MITER);  
     
-    /* draw sites */
+    /* draw grid sites */
     for (i = 0; i < gd->height; i++)
         for (j = 0; j < gd->width; j++)
             draw_site(cr, border_width + j * site_size,
@@ -121,4 +121,5 @@ int create_image(const char *filename, grid *gd, double max_size)
 	
 	return 0;
 } 
+
 

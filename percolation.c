@@ -2,8 +2,8 @@
 #include "definitions.h"
 
 
-/* generates a ramdom grid for given dimensions
-   and site vacancy probability */
+/* generates a ramdom grid for given 
+   site vacancy probability */
 void create_grid(grid *gd, double prob)
 {
     int i, j;
@@ -15,7 +15,8 @@ void create_grid(grid *gd, double prob)
 }
 
 
-/* fills upper layer cells that are open */
+/* fills upper layer cells that are open 
+ */
 void start_flow(grid *gd)
 {
     int j;
@@ -28,7 +29,8 @@ void start_flow(grid *gd)
 
 
 /* checks if the grid structure percolates
-   i.e., if any bottom layer cell is full */
+   i.e., if any bottom layer cell is full 
+ */
 int percolates(grid *gd)
 {
     int j;
@@ -41,10 +43,12 @@ int percolates(grid *gd)
     return 0;
 }
 
+
 /* Takes a pointer to the grid and indexes of
    the full cell. Updates all open adjacent
    neighbors as being filled and calls itself
-   for the updated neighbors recursively */
+   for the updated neighbors recursively 
+ */
 void update_neighbors(grid *gd, int i, int j)
 {
     if (i > 0 && gd->cells[i - 1][j] == SITE_OPEN)
@@ -73,7 +77,11 @@ void update_neighbors(grid *gd, int i, int j)
         
 }
 
-
+ 
+/* Fills the structure with the flow recursively
+   (propagates the FULL site state to all open
+   sites that are adjacent to the FULL cells)
+ */
 void flow_recursive(grid *gd)
 {
     int i, j;
@@ -84,6 +92,7 @@ void flow_recursive(grid *gd)
                 update_neighbors(gd, i, j);
 
 }
+
 
 /* Takes a pointer to the grid and indexes of
    the open cell. If any of neighboring cells
@@ -121,6 +130,11 @@ int check_neighbors(grid *gd, int i, int j)
 }
 
 
+/* Fills the structure with the flow in iterative way 
+   (keep propagating the flow from top left to bottom right
+   and from bottom right to to left until no cell was updated
+   on the previous step)
+ */
 void flow_iterative(grid *gd)
 {
     int i, j;
@@ -142,6 +156,7 @@ void flow_iterative(grid *gd)
     }
 
 }
+
 
 /* generate random grid structure
    with given site vacancy probability
