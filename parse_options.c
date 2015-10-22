@@ -36,18 +36,25 @@ void parse_options(int argc, char **argv, args *arg)
                          "                                                \n"
                          "       -r, --recursive                          \n"
                          "           enable recursive flow propagation    \n"
+                         "                                                \n"                         
+                         "       --help                                   \n"
+                         "           display this help and exit           \n" 
+                         "                                                \n"
+                         "AUTHOR                                          \n"  
+                         "       Written by Taras Kuzyo                   \n"                         
                          "                                                \n";
 
     
     static const struct option long_opts[] = {
-                        { "width",        required_argument, NULL, 'w' }, 
-                        { "height",       required_argument, NULL, 'h' },    
-                        { "probability",  required_argument, NULL, 'p' },
-                        { "output",       required_argument, NULL, 'o' },       
-                        { "size",         required_argument, NULL, 's' },
-                        { "color",        required_argument, NULL, 'c' },
-                        { "recursive",    no_argument,       NULL, 'r' },
-                        {  NULL,          no_argument,       NULL,  0  }  };
+                        { "width",       required_argument, NULL, 'w' }, 
+                        { "height",      required_argument, NULL, 'h' },    
+                        { "probability", required_argument, NULL, 'p' },
+                        { "output",      required_argument, NULL, 'o' },       
+                        { "size",        required_argument, NULL, 's' },
+                        { "color",       required_argument, NULL, 'c' },
+                        { "recursive",   no_argument,       NULL, 'r' },
+                        { "help",        no_argument,       NULL,  0  },
+                        {  NULL,         no_argument,       NULL,  0  }  };
             
     char *options = "w:h:p:p:o:s:r";
 
@@ -109,6 +116,11 @@ void parse_options(int argc, char **argv, args *arg)
                 recursive_flag = 1;
                 break;
                 
+            case 0:
+                printf("%s", usage);
+                exit(0);
+                break;
+                        
             case '?':
                 exit(1);
                 break;
