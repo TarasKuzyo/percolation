@@ -56,7 +56,7 @@ void parse_options(int argc, char **argv, args *arg)
                         { "help",        no_argument,       NULL,  0  },
                         {  NULL,         no_argument,       NULL,  0  }  };
             
-    char *options = "w:h:p:p:o:s:r";
+    char *options = "w:h:p:p:o:s:c:r";
 
     int opt = 0;
     int long_index = 0;
@@ -71,6 +71,7 @@ void parse_options(int argc, char **argv, args *arg)
     int width = 0, height = 0;
     double prob = 0.0, size = 800.0;    
     char filename[STR_BUF_SIZE] = "";
+    color color_index = 0;
     
     
     /* print usage if no args */
@@ -109,7 +110,7 @@ void parse_options(int argc, char **argv, args *arg)
                 break;
                 
             case 'c':
-                printf("color: %s\n", optarg);
+                color_index = atoi(optarg);
                 break;
                 
             case 'r':
@@ -153,6 +154,12 @@ void parse_options(int argc, char **argv, args *arg)
         printf("%s: invalid probability value: %g\n", argv[0], prob);
         exit(1);
     }
+    /* check if color index is valid */
+    if (color_index < 0 || color_index >= NUM_COLORS)
+    {
+        printf("%s: unknown color code: %d\n", argv[0], (int)color_index);
+        exit(1);
+    }
     
     size   = (size   < min_size  ) ? min_size   : size;
     width  = (width  < min_width ) ? min_width  : width;
@@ -162,11 +169,12 @@ void parse_options(int argc, char **argv, args *arg)
     if (strlen(filename) == 0)
         snprintf(filename, STR_BUF_SIZE, "output_%d_%d_%g.png", width, height, prob);
         
-    arg->width     = width;
-    arg->height    = height;
-    arg->prob      = prob;
-    arg->size      = size;
-    arg->recursive = recursive_flag;
+    arg->width      = width;
+    arg->height     = height;
+    arg->prob       = prob;
+    arg->size       = size;
+    arg->color_code = color_index;
+    arg->recursive  = recursive_flag;
     strcpy(arg->filename, filename);
 }
 

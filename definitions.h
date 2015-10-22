@@ -7,6 +7,14 @@
 
 #define STR_BUF_SIZE 256
 
+#define NUM_COLORS 6
+
+
+typedef enum
+{
+  COLOR_ROYAL_BLUE=0,
+} color;
+
 
 typedef struct
 {
@@ -21,17 +29,12 @@ typedef struct
 {
     int width;
     int height;
+    int recursive;
     double prob;
     double size;
-    int recursive;
+    color color_code;
     char filename[STR_BUF_SIZE];
 } args;
-
-
-typedef enum
-{
-  COLOR_ROYAL_BLUE=1,
-} color;
 
 
 /* from utils.c */
