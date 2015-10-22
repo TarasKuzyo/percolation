@@ -9,7 +9,7 @@ TARGET=percolation
 
 all: $(SOURCES) $(TARGET)
 	
-$(TARGET): $(OBJECTS) 
+$(TARGET): $(OBJECTS) $(HEADERS) 
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) 
 
 .c.o:
