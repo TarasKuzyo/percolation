@@ -43,9 +43,9 @@ void parse_options(int argc, char **argv, args *arg)
                         { "width",        required_argument, NULL, 'w' }, 
                         { "height",       required_argument, NULL, 'h' },    
                         { "probability",  required_argument, NULL, 'p' },
-                        { "output",       optional_argument, NULL, 'o' },       
-                        { "size",         optional_argument, NULL, 's' },
-                        { "color",        optional_argument, NULL, 'c' },
+                        { "output",       required_argument, NULL, 'o' },       
+                        { "size",         required_argument, NULL, 's' },
+                        { "color",        required_argument, NULL, 'c' },
                         { "recursive",    no_argument,       NULL, 'r' },
                         {  NULL,          no_argument,       NULL,  0  }  };
             
@@ -54,12 +54,15 @@ void parse_options(int argc, char **argv, args *arg)
     int opt = 0;
     int long_index = 0;
     
+    /* minimal values for some arguments */
     const int min_width = 2, min_height = 2, min_size = 64;
+    /* flags indicating option invocation */
+    int width_flag = 0, height_flag = 0, prob_flag = 0;
     
+    /* default values for the arguments */
     int recursive_flag = 0;
     int width = 0, height = 0;
-    double prob = 0.0;
-    double size = 800.0;    /* default image size */
+    double prob = 0.0, size = 800.0;    
     char filename[STR_BUF_SIZE] = "";
     
     
@@ -76,14 +79,17 @@ void parse_options(int argc, char **argv, args *arg)
         switch (opt)
         {
             case 'w':
+                width_flag = 1;
                 width = atoi(optarg);
                 break;
                 
             case 'h':
+                height_flag = 1;
                 height = atoi(optarg);
                 break;
                 
             case 'p':
+                prob_flag = 1;
                 prob = atof(optarg);
                 break;
             
@@ -113,17 +119,33 @@ void parse_options(int argc, char **argv, args *arg)
                 break;
         }
     }
+    /* check if required arguments were passed */
+    if (!width_flag)
+    {
+        printf("%s: missing '-w' option\n", argv[0]);
+        exit(1);
+    }
+    if (!height_flag)
+    {
+        printf("%s: missing '-h' option\n", argv[0]);
+        exit(1);
+    }
+    if (!prob_flag)
+    {
+        printf("%s: missing '-p' option\n", argv[0]);
+        exit(1);
+    }
+    /* check probability range */
+    if (prob < 0.0 || prob > 1.0)
+    {
+        printf("%s: invalid probability value: %g\n", argv[0], prob);
+        exit(1);
+    }
     
     size   = (size   < min_size  ) ? min_size   : size;
     width  = (width  < min_width ) ? min_width  : width;
     height = (height < min_height) ? min_height : height;
     
-    
-    if (prob < 0.0 || prob > 1.0)
-    {
-        printf("Invalid probability value: %g\n", prob);
-        exit(1);
-    }
     /* set default image filename */
     if (strlen(filename) == 0)
         snprintf(filename, STR_BUF_SIZE, "output_%d_%d_%g.png", width, height, prob);
