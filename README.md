@@ -1,8 +1,8 @@
 # percolation
 2D site percolation project
 
-#TODO
+## TODO
 
-[ ]     add colors to color map
-[ ]     set color from command line
-[ ]     parse color both as enum and int
+* [ ]     add colors to color map
+* [ ]     set color from command line
+* [ ]     parse color both as enum and int
