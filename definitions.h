@@ -31,8 +31,6 @@ typedef struct
 typedef enum
 {
   COLOR_ROYAL_BLUE=1,
-  COLOR_OLIVE_GREEN,
-  COLOR_BOWN
 } color;
 
 
@@ -52,6 +50,5 @@ void parse_options(int argc, char **argv, args *arg);
 
 
 #endif /* __DEFINITIONS_H__ */
-
 
 
