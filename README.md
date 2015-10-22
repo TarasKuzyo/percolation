@@ -6,3 +6,5 @@
 * [ ]     add colors to color map
 * [ ]     set color from command line
 * [ ]     parse color both as enum and int
+
+![Alt text](out.png?raw=true "Percolation structure")
