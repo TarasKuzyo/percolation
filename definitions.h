@@ -5,7 +5,6 @@
 #define SITE_OPEN  1
 #define SITE_FULL  2
 
-
 #define STR_BUF_SIZE 256
 
 
@@ -29,21 +28,20 @@ typedef struct
 } args;
 
 
+typdef enum
+{
+  COLOR_ROYAL_BLUE=1,
+  COLOR_OLIVE_GREEN,
+  COLOR_BOWN
+} color;
+
+
 /* from utils.c */
 void free_grid(grid *gd);
 grid* allocate_grid(int width, int height);
 void write_grid(const char *filename, grid *gd);
 
 /* from percolation.c */
-
-void create_grid(grid *gd, double prob);
-
-void start_flow(grid *gd);
-int percolates(grid *gd);
-
-void flow_recursive(grid *gd);
-void flow_iterative(grid *gd);
-
 int run_percolation(grid *gd, double prob, int recursive_flag);
 
 /* from drawing.c */
