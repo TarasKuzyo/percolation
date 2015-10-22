@@ -28,7 +28,7 @@ typedef struct
 } args;
 
 
-typdef enum
+typedef enum
 {
   COLOR_ROYAL_BLUE=1,
   COLOR_OLIVE_GREEN,
