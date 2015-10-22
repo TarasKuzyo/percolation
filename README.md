@@ -7,4 +7,4 @@
 * [ ]     set color from command line
 * [ ]     parse color both as enum and int
 
-![Alt text](out.png?raw=true "Percolation structure")
+<a><img src="out.png" align="left" height="48" width="48" ></a>
