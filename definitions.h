@@ -12,7 +12,7 @@
 
 typedef enum
 {
-  COLOR_ROYAL_BLUE=0,
+  COLOR_ROYAL_BLUE = 0,
 } color;
 
 
@@ -46,7 +46,7 @@ void write_grid(const char *filename, grid *gd);
 int run_percolation(grid *gd, double prob, int recursive_flag);
 
 /* from drawing.c */
-int create_image(const char *filename, grid *gd, double max_size);
+int create_image(const char *filename, grid *gd, double max_size, color cl);
 
 /* from parse_options.c */
 void parse_options(int argc, char **argv, args *arg);

@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     grid *gd = allocate_grid(cmd_args.width, cmd_args.height);
     run_percolation(gd, cmd_args.prob, cmd_args.recursive);
 
-    create_image(cmd_args.filename, gd, cmd_args.size);
+    create_image(cmd_args.filename, gd, cmd_args.size, cmd_args.color_code);
     //write_grid("out.txt", gd);
 
     free_grid(gd);

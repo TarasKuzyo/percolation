@@ -30,10 +30,11 @@ static float colormap[4][3][3] = {
    drawing context (cr) as a square
    given its position, size and value
  */
-void draw_site(cairo_t *cr, double x, double y, double size, int site)
+void draw_site(cairo_t *cr, double x, double y, double size, color cl, int site)
 {
-    /* color shortcut */
-    float (*c)[3][3] = &colormap[0];
+    /* color shortcut 
+       (range is checked on input) */
+    float (*c)[3][3] = &colormap[cl];
     
     if (site == SITE_BLOCK)
         cairo_set_source_rgb(cr, (*c)[0][0], (*c)[0][1], (*c)[0][2]);
@@ -54,7 +55,7 @@ void draw_site(cairo_t *cr, double x, double y, double size, int site)
    and maximum image size (width or height)
    Writes the grid image to the file
  */
-int create_image(const char *filename, grid *gd, double max_size)
+int create_image(const char *filename, grid *gd, double max_size, color cl)
 {
     int i, j; 
     
@@ -111,7 +112,7 @@ int create_image(const char *filename, grid *gd, double max_size)
         for (j = 0; j < gd->width; j++)
             draw_site(cr, border_width + j * site_size,
                           border_width + i * site_size, 
-                          site_size, gd->cells[i][j]);          
+                          site_size, cl, gd->cells[i][j]);          
     
     if (strcmp(ext, "png") == 0)
         cairo_surface_write_to_png(surface, filename);
