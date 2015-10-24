@@ -5,28 +5,10 @@
 #include <cairo-svg.h> 
 
 #include "definitions.h"
+#include "color_tools.h"
 
 
-static float colormap[4][3][3] = {
-    {{0.15, 0.15, 0.15}, 
-     {0.90, 0.90, 0.90}, 
-     {0.40, 0.40, 0.90}},
-    
-    {{0.15, 0.15, 0.15}, 
-     {0.90, 0.90, 0.90}, 
-     {0.45, 0.25, 0.30}},
-     
-    {{0.15, 0.15, 0.15}, 
-     {0.90, 0.90, 0.90}, 
-     {0.35, 0.65, 0.15}},
-     
-    {{0.15, 0.15, 0.15}, 
-     {0.90, 0.90, 0.90}, 
-     {0.45, 0.51, 0.18}},
-};
-
-
-/* darws a single site with cairo 
+/* draws a single site with cairo 
    drawing context (cr) as a square
    given its position, size and value
  */
