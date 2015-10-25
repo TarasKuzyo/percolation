@@ -12,11 +12,16 @@
    drawing context (cr) as a square
    given its position, size and value
  */
-void draw_site(cairo_t *cr, double x, double y, double size, color cl, int site)
+void draw_site(cairo_t *cr, double x, double y, double size, int cl, int site)
 {
     /* color shortcut 
        (range is checked on input) */
-    float (*c)[3][3] = &colormap[cl];
+    float_rgb rgb = hex_to_float_rgb(cl);
+    float col[1][3][3] = {{ {0.15,  0.15,  0.15 }, 
+                            {0.90,  0.90,  0.90 }, 
+                            {rgb.r, rgb.g, rgb.b} }};
+    float (*c)[3][3] = (cl < COLOR_PAD) ? &col[0] : &colormap[cl - COLOR_PAD]; 
+              
     
     if (site == SITE_BLOCK)
         cairo_set_source_rgb(cr, (*c)[0][0], (*c)[0][1], (*c)[0][2]);
@@ -37,7 +42,7 @@ void draw_site(cairo_t *cr, double x, double y, double size, color cl, int site)
    and maximum image size (width or height)
    Writes the grid image to the file
  */
-int create_image(const char *filename, grid *gd, double max_size, color cl)
+int create_image(const char *filename, grid *gd, double max_size, int cl)
 {
     int i, j; 
     
