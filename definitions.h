@@ -22,9 +22,9 @@ typedef struct
     int width;
     int height;
     int recursive;
+    int color;
     double prob;
     double size;
-    int color;
     char filename[STR_BUF_SIZE];
 } args;
 

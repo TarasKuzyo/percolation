@@ -109,21 +109,25 @@ void parse_options(int argc, char **argv, args *arg)
                 break;
             
             case 's':
+                /* image maximum size 
+                   (either width of height) in px */
                 size = atof(optarg);
                 break;
                 
             case 'o':
+                /* set custum output filename */
                 strcpy(filename, optarg);
                 break;
                 
             case 'c':
-                /* try converting from hex representation 
-                   use simple integer conversion otherwise */
+                /* try converting from hex representation
+                   use simple integer conversion if failed */
                 if ( ! str_to_hex(optarg, &color) )
                     color = COLOR_PAD + atoi(optarg);
                 break;
                 
             case 'l':
+                /* list colors indexes available */
                 colormap_show();
                 exit(0);
                 break;

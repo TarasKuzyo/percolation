@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include "color_tools.h"
 
+
 /* lookup tagle for some of predefined colors */
 int colormap[NUM_COLORS] = {0xd53e4f, 0xf46d43, 0xfdae61, 
         0xfee08b, 0xe6f598, 0xabdda4, 0x66c2a5, 0x3288bd };
 
 
+/* displays contents of the colormap array
+   both as hex and rgb colors 
+ */
 void colormap_show()
 {
     int i, hex;
@@ -16,7 +20,7 @@ void colormap_show()
     printf("    Index       Hex         RGB Value\n");
     for (i = 0; i < NUM_COLORS; i++)
     {
-        hex = colormap[i];
+        hex   = colormap[i];
         color = hex_to_rgb(hex);
         r = (int)(color.r * 255);
         g = (int)(color.g * 255);
@@ -24,6 +28,7 @@ void colormap_show()
         printf("\t%d   #%x   (%3d, %3d, %3d)\n", i, hex, r, g, b);
     }        
 }
+
 
 /* converts hex value to rgb struct
  */
@@ -37,6 +42,7 @@ rgb hex_to_rgb(int hex_val)
     return color;
 }
 
+
 /* converts rgb struct to hex value 
  */
 int rgb_to_hex(rgb color)
@@ -46,6 +52,7 @@ int rgb_to_hex(rgb color)
             ( (int)(color.b * 255) & 0xff );
 }
 
+
 /* converts color string of form "#rrggbb"
    to its hex value
  */
@@ -53,4 +60,5 @@ int str_to_hex(char *str, int *hex)
 {
     return (str[0] == '#') ? sscanf(str + 1, "%x", hex) : 0;
 }
+
 
