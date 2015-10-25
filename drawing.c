@@ -12,15 +12,15 @@
    drawing context (cr) as a square
    given its position, size and value
  */
-void draw_site(cairo_t *cr, double x, double y, double size, int cl, int site)
+void draw_site(cairo_t *cr, double x, double y, double size, int color, int site)
 {
     /* color shortcut 
        (range is checked on input) */
-    float_rgb rgb = hex_to_float_rgb(cl);
-    float col[1][3][3] = {{ {0.15,  0.15,  0.15 }, 
-                            {0.90,  0.90,  0.90 }, 
-                            {rgb.r, rgb.g, rgb.b} }};
-    float (*c)[3][3] = (cl < COLOR_PAD) ? &col[0] : &colormap[cl - COLOR_PAD]; 
+    rgb cl = hex_to_rgb(color);
+    float col[1][3][3] = {{ { 0.15, 0.15, 0.15 }, 
+                            { 0.90, 0.90, 0.90 }, 
+                            { cl.r, cl.g, cl.b } }};
+    float (*c)[3][3] = (color < COLOR_PAD) ? &col[0] : &colormap[color - COLOR_PAD]; 
               
     
     if (site == SITE_BLOCK)

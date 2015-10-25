@@ -21,48 +21,29 @@ float colormap[NUM_COLORS][3][3] = {
 };
 
 
-int_rgb hex_to_int_rgb(int hex_val)
+rgb hex_to_rgb(int hex_val)
 {
-    int_rgb rgb_color;
-    rgb_color.r = ((hex_val >> 16) & 0xff);
-    rgb_color.g = ((hex_val >> 8 ) & 0xff);
-    rgb_color.b = ((hex_val      ) & 0xff);
+    rgb color;
+    color.r = ((hex_val >> 16) & 0xff) / 255.0;
+    color.g = ((hex_val >> 8 ) & 0xff) / 255.0;
+    color.b = ((hex_val      ) & 0xff) / 255.0;
 
-    return rgb_color;
+    return color;
 }
 
 
-int int_rgb_to_hex(int_rgb rgb)
+int rgb_to_hex(rgb color)
 {   
-    return ((rgb.r & 0xff) << 16) + 
-           ((rgb.g & 0xff) << 8 ) + 
-            (rgb.b & 0xff);
-}
-
-
-float_rgb hex_to_float_rgb(int hex_val)
-{
-    float_rgb rgb_color;
-    rgb_color.r = ((hex_val >> 16) & 0xff) / 255.0;
-    rgb_color.g = ((hex_val >> 8 ) & 0xff) / 255.0;
-    rgb_color.b = ((hex_val      ) & 0xff) / 255.0;
-
-    return rgb_color;
-}
-
-
-int float_rgb_to_hex(int_rgb rgb)
-{   
-    return (( (int)(rgb.r * 255) & 0xff ) << 16) + 
-           (( (int)(rgb.g * 255) & 0xff ) << 8 ) + 
-            ( (int)(rgb.b * 255) & 0xff );
+    return (( (int)(color.r * 255) & 0xff ) << 16) + 
+           (( (int)(color.g * 255) & 0xff ) << 8 ) + 
+            ( (int)(color.b * 255) & 0xff );
 }
 
 /* converts color string of form #rrggbb to 
    its hex value
  */
-int str_to_hex(char *color, int *hex)
+int str_to_hex(char *str, int *hex)
 {
-    return (color[0] == '#') ? sscanf(color + 1, "%x", hex) : 0;
+    return (str[0] == '#') ? sscanf(str + 1, "%x", hex) : 0;
 }
 
