@@ -7,14 +7,6 @@
 
 #define STR_BUF_SIZE 256
 
-#define NUM_COLORS 6
-
-
-typedef enum
-{
-  COLOR_ROYAL_BLUE = 0,
-} color;
-
 
 typedef struct
 {
@@ -32,7 +24,7 @@ typedef struct
     int recursive;
     double prob;
     double size;
-    color color_code;
+    int color;
     char filename[STR_BUF_SIZE];
 } args;
 
@@ -46,7 +38,7 @@ void write_grid(const char *filename, grid *gd);
 int run_percolation(grid *gd, double prob, int recursive_flag);
 
 /* from drawing.c */
-int create_image(const char *filename, grid *gd, double max_size, color cl);
+int create_image(const char *filename, grid *gd, double max_size, int cl);
 
 /* from parse_options.c */
 void parse_options(int argc, char **argv, args *arg);
