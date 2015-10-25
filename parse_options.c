@@ -5,6 +5,7 @@
 #include <getopt.h>
 
 #include "definitions.h"
+#include "color_tools.h"
 
 
 void parse_options(int argc, char **argv, args *arg)
@@ -71,7 +72,7 @@ void parse_options(int argc, char **argv, args *arg)
     int width = 0, height = 0;
     double prob = 0.0, size = 800.0;    
     char filename[STR_BUF_SIZE] = "";
-    color color_index = 0;
+    int color = 0;
     
     
     /* print usage if no args */
@@ -110,7 +111,10 @@ void parse_options(int argc, char **argv, args *arg)
                 break;
                 
             case 'c':
-                color_index = atoi(optarg);
+                /* try converting from hex representation 
+                   use simple integer conversion otherwise */
+                if ( ! str_to_hex(optarg, &color) )
+                    color = COLOR_PAD + atoi(optarg);
                 break;
                 
             case 'r':
@@ -155,9 +159,9 @@ void parse_options(int argc, char **argv, args *arg)
         exit(1);
     }
     /* check if color index is valid */
-    if (color_index < 0 || color_index >= NUM_COLORS)
+    if (color < 0 || color - COLOR_PAD >= NUM_COLORS)
     {
-        printf("%s: unknown color code: %d\n", argv[0], (int)color_index);
+        printf("%s: unknown color code: %x\n", argv[0], (int)(color));
         exit(1);
     }
     
@@ -173,7 +177,7 @@ void parse_options(int argc, char **argv, args *arg)
     arg->height     = height;
     arg->prob       = prob;
     arg->size       = size;
-    arg->color_code = color_index;
+    arg->color      = color;
     arg->recursive  = recursive_flag;
     strcpy(arg->filename, filename);
 }
