@@ -2,25 +2,12 @@
 #include "color_tools.h"
 
 
-float colormap[NUM_COLORS][3][3] = {
-    {{0.15, 0.15, 0.15}, 
-     {0.90, 0.90, 0.90}, 
-     {0.40, 0.40, 0.90}},
-    
-    {{0.15, 0.15, 0.15}, 
-     {0.90, 0.90, 0.90}, 
-     {0.45, 0.25, 0.30}},
-     
-    {{0.15, 0.15, 0.15}, 
-     {0.90, 0.90, 0.90}, 
-     {0.35, 0.65, 0.15}},
-     
-    {{0.15, 0.15, 0.15}, 
-     {0.90, 0.90, 0.90}, 
-     {0.45, 0.51, 0.18}},
-};
+int colormap[NUM_COLORS] = {0xd53e4f, 0xf46d43, 0xfdae61, 
+        0xfee08b, 0xe6f598, 0xabdda4, 0x66c2a5, 0x3288bd };
 
 
+/* converts hex value to rgb struct 
+ */
 rgb hex_to_rgb(int hex_val)
 {
     rgb color;
@@ -31,7 +18,8 @@ rgb hex_to_rgb(int hex_val)
     return color;
 }
 
-
+/* converts rgb struct to hex value 
+ */
 int rgb_to_hex(rgb color)
 {   
     return (( (int)(color.r * 255) & 0xff ) << 16) + 
@@ -39,8 +27,8 @@ int rgb_to_hex(rgb color)
             ( (int)(color.b * 255) & 0xff );
 }
 
-/* converts color string of form #rrggbb to 
-   its hex value
+/* converts color string of form "#rrggbb"
+   to its hex value
  */
 int str_to_hex(char *str, int *hex)
 {

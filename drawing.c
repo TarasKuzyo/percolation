@@ -10,25 +10,26 @@
 
 /* draws a single site with cairo 
    drawing context (cr) as a square
-   given its position, size and value
+   given its position, size, color index and value
  */
-void draw_site(cairo_t *cr, double x, double y, double size, int color, int site)
+void draw_site(cairo_t *cr, double x, double y, double size, int c, int site)
 {
-    /* color shortcut 
-       (range is checked on input) */
-    rgb cl = hex_to_rgb(color);
-    float col[1][3][3] = {{ { 0.15, 0.15, 0.15 }, 
-                            { 0.90, 0.90, 0.90 }, 
-                            { cl.r, cl.g, cl.b } }};
-    float (*c)[3][3] = (color < COLOR_PAD) ? &col[0] : &colormap[color - COLOR_PAD]; 
-              
+    /* hex color value for the full site */
+    /* if c is less than COLOR_PAD then it is 
+       valid RGB value otherwise pick hex value 
+       from lookup table using c as index shifted 
+       by COLOR_PAD */
+    int color = (c < COLOR_PAD) ? c : colormap[c - COLOR_PAD];
+    rgb b_cl = hex_to_rgb(SITE_BLOCK_COLOR);
+    rgb o_cl = hex_to_rgb(SITE_OPEN_COLOR);    
+    rgb f_cl = hex_to_rgb(color);
     
     if (site == SITE_BLOCK)
-        cairo_set_source_rgb(cr, (*c)[0][0], (*c)[0][1], (*c)[0][2]);
+        cairo_set_source_rgb(cr, b_cl.r, b_cl.g, b_cl.b);
     else if (site == SITE_OPEN)
-        cairo_set_source_rgb(cr, (*c)[1][0], (*c)[1][1], (*c)[1][2]);
+        cairo_set_source_rgb(cr, o_cl.r, o_cl.g, o_cl.b);
     else if (site == SITE_FULL)
-        cairo_set_source_rgb(cr, (*c)[2][0], (*c)[2][1], (*c)[2][2]);
+        cairo_set_source_rgb(cr, f_cl.r, f_cl.g, f_cl.b);
     
     cairo_rectangle(cr, x, y, size, size);
     cairo_fill_preserve(cr);
