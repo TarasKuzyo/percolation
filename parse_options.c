@@ -10,40 +10,45 @@
 
 void parse_options(int argc, char **argv, args *arg)
 {
-    static char *usage = "NAME                                            \n"
-                         "       percolation - 2D site percolation        \n"  
-                         "                                                \n"
-                         "SYNOPSIS                                        \n"
-                         "       percolation [OPTION]...                  \n"
-                         "                                                \n"
-                         "DESCRIPTION                                     \n"
-                         "       -w, --width                              \n"
-                         "           grid width                           \n"
-                         "                                                \n"
-                         "       -h, --height                             \n"
-                         "           grid height                          \n"
-                         "                                                \n"
-                         "       -p, --probability                        \n"
-                         "           site vacancy probability             \n"
-                         "                                                \n"
-                         "       -o, --output                             \n"
-                         "           output image file (either png or svg)\n"
-                         "                                                \n"
-                         "       -s, --size                               \n"
-                         "           maximum image size                   \n"
-                         "                                                \n"
-                         "       -c, --color                              \n"
-                         "           colormap name                        \n"
-                         "                                                \n"
-                         "       -r, --recursive                          \n"
-                         "           enable recursive flow propagation    \n"
-                         "                                                \n"                         
-                         "       --help                                   \n"
-                         "           display this help and exit           \n" 
-                         "                                                \n"
-                         "AUTHOR                                          \n"  
-                         "       Written by Taras Kuzyo                   \n"                         
-                         "                                                \n";
+    static char *usage = "NAME                                                 \n"
+                         "       percolation - 2D site percolation             \n"  
+                         "                                                     \n"
+                         "SYNOPSIS                                             \n"
+                         "       percolation [OPTION]...                       \n"
+                         "                                                     \n"
+                         "DESCRIPTION                                          \n"
+                         "       -w, --width                                   \n"
+                         "           grid width                                \n"
+                         "                                                     \n"
+                         "       -h, --height                                  \n"
+                         "           grid height                               \n"
+                         "                                                     \n"
+                         "       -p, --probability                             \n"
+                         "           site vacancy probability                  \n"
+                         "                                                     \n"
+                         "       -o, --output                                  \n"
+                         "           output image file (either png or svg)     \n"
+                         "                                                     \n"
+                         "       -s, --size                                    \n"
+                         "           maximum image size                        \n"
+                         "                                                     \n"
+                         "       -c, --color                                   \n"
+                         "           color for the full sites in form '#rrggbb'\n"
+                         "           or as a lookup table index                \n"                         
+                         "                                                     \n"
+                         "       -l, --list-colors                             \n"
+                         "           dispalys a list of predefined colors and  \n"
+                         "           their indexes (an argument for -c option) \n"
+                         "                                                     \n"
+                         "       -r, --recursive                               \n"
+                         "           enable recursive flow propagation         \n"
+                         "                                                     \n"                         
+                         "       --help                                        \n"
+                         "           display this help and exit                \n" 
+                         "                                                     \n"
+                         "AUTHOR                                               \n"  
+                         "       Written by Taras Kuzyo                        \n"                         
+                         "                                                     \n";
 
     
     static const struct option long_opts[] = {
@@ -53,11 +58,12 @@ void parse_options(int argc, char **argv, args *arg)
                         { "output",      required_argument, NULL, 'o' },       
                         { "size",        required_argument, NULL, 's' },
                         { "color",       required_argument, NULL, 'c' },
+                        { "list-colors", no_argument,       NULL, 'l' },
                         { "recursive",   no_argument,       NULL, 'r' },
                         { "help",        no_argument,       NULL,  0  },
                         {  NULL,         no_argument,       NULL,  0  }  };
             
-    char *options = "w:h:p:p:o:s:c:r";
+    char *options = "w:h:p:p:o:s:c:lr";
 
     int opt = 0;
     int long_index = 0;
@@ -115,6 +121,11 @@ void parse_options(int argc, char **argv, args *arg)
                    use simple integer conversion otherwise */
                 if ( ! str_to_hex(optarg, &color) )
                     color = COLOR_PAD + atoi(optarg);
+                break;
+                
+            case 'l':
+                colormap_show();
+                exit(0);
                 break;
                 
             case 'r':

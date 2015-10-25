@@ -19,6 +19,7 @@ typedef struct {
 
 
 int colormap[NUM_COLORS];
+void colormap_show();
 
 rgb hex_to_rgb(int hex_val);
 int str_to_hex(char *color, int *hex_val);
