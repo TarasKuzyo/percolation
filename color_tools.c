@@ -1,7 +1,8 @@
+#include <stdio.h>
 #include "color_tools.h"
 
 
-float colormap[4][3][3] = {
+float colormap[NUM_COLORS][3][3] = {
     {{0.15, 0.15, 0.15}, 
      {0.90, 0.90, 0.90}, 
      {0.40, 0.40, 0.90}},
@@ -55,5 +56,13 @@ int float_rgb_to_hex(int_rgb rgb)
     return (( (int)(rgb.r * 255) & 0xff ) << 16) + 
            (( (int)(rgb.g * 255) & 0xff ) << 8 ) + 
             ( (int)(rgb.b * 255) & 0xff );
+}
+
+/* converts color string of form #rrggbb to 
+   its hex value
+ */
+int str_to_hex(char *color, int *hex)
+{
+    return (color[0] == '#') ? sscanf(color + 1, "%x", hex) : 0;
 }
 
