@@ -21,7 +21,7 @@ int main(int argc, char **argv)
     
     create_image(cmd_args.filename, gd, cmd_args.size, cmd_args.color);
     
-    printf("Finished in %12.7e sec\n", (double)(end - beg) / CLOCKS_PER_SEC);
+    printf("Finished in %g sec\n", (double)(end - beg) / CLOCKS_PER_SEC);
 
     free_grid(gd);
     
