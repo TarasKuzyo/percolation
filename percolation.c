@@ -131,9 +131,8 @@ int check_neighbors(grid *gd, int i, int j)
 
 
 /* Fills the structure with the flow in iterative way 
-   (keep propagating the flow from top left to bottom right
-   and from bottom right to to left until no cell was updated
-   on the previous step)
+   (keep propagating the flow using 4 diagonal-direction sweeps 
+   until no cell has been updated updated on the previous step)
  */
 void flow_iterative(grid *gd)
 {
@@ -142,12 +141,22 @@ void flow_iterative(grid *gd)
     while (update_flag)
     {
         update_flag = 0;
-        
+        /* top left -> bottom right */
         for (i = 0; i < gd->height; i++)
             for (j = 0; j < gd->width; j++)
                 if (gd->cells[i][j] == SITE_OPEN)
                     update_flag += check_neighbors(gd, i, j);
-                
+         /* top right -> bottom left */
+        for (i = 0; i < gd->height; i++)
+            for (j = gd->width - 1; j >= 0; j--)
+                if (gd->cells[i][j] == SITE_OPEN)
+                    update_flag += check_neighbors(gd, i, j);
+        /* bottom left -> top right */       
+        for (i = gd->height - 1; i >= 0; i--)
+            for (j = 0; j < gd->width; j++)
+                if (gd->cells[i][j] == SITE_OPEN)
+                    update_flag += check_neighbors(gd, i, j);                     
+        /* bottom right -> top left */      
         for (i = gd->height - 1; i >= 0; i--)
             for (j = gd->width - 1; j >= 0; j--)
                 if (gd->cells[i][j] == SITE_OPEN)
