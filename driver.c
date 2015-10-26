@@ -18,10 +18,10 @@ int main(int argc, char **argv)
     beg = clock();
     run_percolation(gd, cmd_args.prob, cmd_args.recursive);
     end = clock();
-    #if 0
+    
     create_image(cmd_args.filename, gd, cmd_args.size, cmd_args.color);
-    #endif
-    printf("Finished in %g sec\n", (double)(end - beg) / CLOCKS_PER_SEC);
+    
+    printf("Finished in %12.7e sec\n", (double)(end - beg) / CLOCKS_PER_SEC);
 
     free_grid(gd);
     
