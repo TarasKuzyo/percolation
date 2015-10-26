@@ -22,6 +22,7 @@ typedef struct
     int width;
     int height;
     int recursive;
+    int img_output;
     int color;
     double prob;
     double size;

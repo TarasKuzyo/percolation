@@ -42,7 +42,10 @@ void parse_options(int argc, char **argv, args *arg)
                          "                                                     \n"
                          "       -r, --recursive                               \n"
                          "           enable recursive flow propagation         \n"
-                         "                                                     \n"                         
+                         "                                                     \n"  
+                         "       -O, --no-output                               \n" 
+                         "           disable image output                      \n" 
+                         "                                                     \n"                        
                          "       --help                                        \n"
                          "           display this help and exit                \n" 
                          "                                                     \n"
@@ -60,10 +63,11 @@ void parse_options(int argc, char **argv, args *arg)
                         { "color",       required_argument, NULL, 'c' },
                         { "list-colors", no_argument,       NULL, 'l' },
                         { "recursive",   no_argument,       NULL, 'r' },
+                        { "no-output",   no_argument,       NULL, 'O' },
                         { "help",        no_argument,       NULL,  0  },
                         {  NULL,         no_argument,       NULL,  0  }  };
             
-    char *options = "w:h:p:p:o:s:c:lr";
+    char *options = "w:h:p:p:o:s:c:lrO";
 
     int opt = 0;
     int long_index = 0;
@@ -75,6 +79,7 @@ void parse_options(int argc, char **argv, args *arg)
     
     /* default values for the arguments */
     int recursive_flag = 0;
+    int img_output = 1;
     int width = 0, height = 0;
     double prob = 0.0, size = 800.0;    
     char filename[STR_BUF_SIZE] = "";
@@ -136,6 +141,10 @@ void parse_options(int argc, char **argv, args *arg)
                 recursive_flag = 1;
                 break;
                 
+            case 'O':
+                img_output = 0;
+                break;
+                
             case 0:
                 printf("%s", usage);
                 exit(0);
@@ -193,6 +202,7 @@ void parse_options(int argc, char **argv, args *arg)
     arg->prob       = prob;
     arg->size       = size;
     arg->color      = color;
+    arg->img_output = img_output;
     arg->recursive  = recursive_flag;
     strcpy(arg->filename, filename);
 }

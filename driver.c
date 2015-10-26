@@ -19,7 +19,8 @@ int main(int argc, char **argv)
     run_percolation(gd, cmd_args.prob, cmd_args.recursive);
     end = clock();
     
-    create_image(cmd_args.filename, gd, cmd_args.size, cmd_args.color);
+    if (cmd_args.img_output)
+        create_image(cmd_args.filename, gd, cmd_args.size, cmd_args.color);
     
     printf("Finished in %g sec\n", (double)(end - beg) / CLOCKS_PER_SEC);
 
