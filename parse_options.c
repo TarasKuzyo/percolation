@@ -83,7 +83,7 @@ void parse_options(int argc, char **argv, args *arg)
     int width = 0, height = 0;
     double prob = 0.0, size = 800.0;    
     char filename[STR_BUF_SIZE] = "";
-    int color = 0;
+    int color = COLOR_PAD;
     
     
     /* print usage if no args */
