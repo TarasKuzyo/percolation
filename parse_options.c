@@ -8,7 +8,7 @@
 #include "color_tools.h"
 
 
-void parse_options(int argc, char **argv, args *arg)
+void parse_options(int argc, char **argv, cmd_args *args)
 {
     static char *usage = "NAME                                                 \n"
                          "       percolation - 2D site percolation             \n"  
@@ -197,14 +197,14 @@ void parse_options(int argc, char **argv, args *arg)
     if (strlen(filename) == 0)
         snprintf(filename, STR_BUF_SIZE, "output_%d_%d_%g.png", width, height, prob);
         
-    arg->width      = width;
-    arg->height     = height;
-    arg->prob       = prob;
-    arg->size       = size;
-    arg->color      = color;
-    arg->img_output = img_output;
-    arg->recursive  = recursive_flag;
-    strcpy(arg->filename, filename);
+    args->width      = width;
+    args->height     = height;
+    args->prob       = prob;
+    args->size       = size;
+    args->color      = color;
+    args->img_output = img_output;
+    args->recursive  = recursive_flag;
+    strcpy(args->filename, filename);
 }
 
 

@@ -27,7 +27,7 @@ typedef struct
     double prob;
     double size;
     char filename[STR_BUF_SIZE];
-} args;
+} cmd_args;
 
 
 /* from utils.c */
@@ -42,7 +42,7 @@ int run_percolation(grid *gd, double prob, int recursive_flag);
 int create_image(const char *filename, grid *gd, double max_size, int cl);
 
 /* from parse_options.c */
-void parse_options(int argc, char **argv, args *arg);
+void parse_options(int argc, char **argv, cmd_args *args);
 
 
 #endif /* __DEFINITIONS_H__ */

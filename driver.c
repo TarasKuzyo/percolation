@@ -10,17 +10,17 @@ int main(int argc, char **argv)
     srand(time(NULL));
     clock_t beg, end;
 
-    args cmd_args;
-    parse_options(argc, argv, &cmd_args);
+    cmd_args args;
+    parse_options(argc, argv, &args);
     
-    grid *gd = allocate_grid(cmd_args.width, cmd_args.height);
+    grid *gd = allocate_grid(args.width, args.height);
     
     beg = clock();
-    run_percolation(gd, cmd_args.prob, cmd_args.recursive);
+    run_percolation(gd, args.prob, args.recursive);
     end = clock();
     
-    if (cmd_args.img_output)
-        create_image(cmd_args.filename, gd, cmd_args.size, cmd_args.color);
+    if (args.img_output)
+        create_image(args.filename, gd, args.size, args.color);
     
     printf("Finished in %g sec\n", (double)(end - beg) / CLOCKS_PER_SEC);
 
