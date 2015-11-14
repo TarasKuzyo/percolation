@@ -3,10 +3,10 @@
 
 /* size of the lookup table */
 #define NUM_COLORS 8
-/* color indexes of some predefined colors */
+/* start of color indexes for some predefined colors */
 #define COLOR_PAD (0xffffff + 1)    
 
-
+/* default colors for open and block cells */
 #define SITE_BLOCK_COLOR 0x262626
 #define SITE_OPEN_COLOR  0xe6e6e6
 

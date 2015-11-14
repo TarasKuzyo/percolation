@@ -31,8 +31,8 @@ typedef struct
 
 
 /* from utils.c */
-void free_grid(grid *gd);
 grid* allocate_grid(int width, int height);
+void free_grid(grid *gd);
 void write_grid(const char *filename, grid *gd);
 
 /* from percolation.c */

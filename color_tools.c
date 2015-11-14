@@ -2,7 +2,7 @@
 #include "color_tools.h"
 
 
-/* lookup tagle for some of predefined colors */
+/* lookup table for some of the predefined colors */
 int colormap[NUM_COLORS] = {0xd53e4f, 0xf46d43, 0xfdae61, 
         0xfee08b, 0xe6f598, 0xabdda4, 0x66c2a5, 0x3288bd };
 

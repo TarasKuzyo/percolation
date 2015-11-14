@@ -56,7 +56,7 @@ int create_image(const char *filename, grid *gd, double max_size, int cl)
     double site_size  = img_width/gd->width;
     double line_width = site_size/50.0;
     
-    /* include border to the image width */
+    /* include border to the image size */
     double border_width = max_size/50.0;
     img_width  = img_width  + 2 * border_width;
     img_height = img_height + 2 * border_width;
@@ -81,7 +81,7 @@ int create_image(const char *filename, grid *gd, double max_size, int cl)
     else
     {
         printf("Unsupported output image format: '%s'\n", ext);
-        return 1;
+        return 2;
     }
         
 	cr = cairo_create(surface);

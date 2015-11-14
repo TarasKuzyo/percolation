@@ -84,12 +84,11 @@ void free_grid(grid *gd)
 }
 
 
-/* saves current grid structure as ascii file
+/* saves current grid structure as an ascii file
  */
 void write_grid(const char *filename, grid *gd)
 {
     FILE *fp;
-    
     int i, j;
     
     if ((fp = fopen(filename, "w")) == NULL) 
