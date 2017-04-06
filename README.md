@@ -4,6 +4,8 @@ The site percolation code on two dimensional grid
 
 ### Description
 
+<img style="float: right;" src="data/percolation.png" height="200" alt="site percolation" />
+
 The code implements [site percolation problem](https://en.wikipedia.org/wiki/Percolation_theory) 
 on 2D rectangular grid of cells (or "sites"). 
 
@@ -16,7 +18,7 @@ and above which the probability is always 1. For 2D site percolation the critica
 The program generates a grid of cells for the site vacancy probability `p` and creates a percolation flow
 from top to bottom. This makes those "open" cells through which the flow propagates "full". 
 The output can be visualized with grid image with different colors for "occupied", "empty" and "full" cells.
-[Cairo graphics library](https://www.cairographics.org) is used for generation .svg and .png output images.
+[Cairo graphics library](https://www.cairographics.org) is used for generation output images in .svg or .png format.
 
 
 ### Compilation and usage
@@ -29,7 +31,7 @@ The program takes 3 mandatory command line arguments:
 * grid height
 * site vacancy probability (floating point value in 0..1 range). 
 
-Optionally one can set the output file paraneters (name and type, maximum image size) and color scheme used.
+Optionally one can set the output file paraneters (name and format, maximum image size) and color scheme used.
 The output image dimensions are proportional to the grid size, unless an upper limit of image sizes is set
 using `--size` option.
 
