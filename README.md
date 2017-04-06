@@ -4,20 +4,20 @@ The site percolation code on two dimensional grid
 
 ### Description
 
-<img style="float: right;" src="data/percolation.png" height="200" alt="site percolation" />
+<img align="right" src="data/percolation.png" height="180" alt="site percolation" />
 
 The code implements [site percolation problem](https://en.wikipedia.org/wiki/Percolation_theory) 
-on 2D rectangular grid of cells (or "sites"). 
+on 2D rectangular grid of cells (or "sites").
 
-A site is "occupied" with probability `p` or "empty" with probability `1 - p` and 
-those probabilities are assumed to be independent for all cells. The question of the problem is: 
+A site is "occupied" with probability `p` or "empty" with probability `1 - p`. 
+Those probabilities are assumed to be independent for all cells. The question of the problem is: 
 for a given `p`, what is the probability that an open path exists between top and bottom?
-According to the theory there exists a critical `p` below which the probability is always 0 
+According to the theory there exists a critical value of `p` below which the percolation probability is always 0 
 and above which the probability is always 1. For 2D site percolation the critical value of `p` is close to 0.6.
 
 The program generates a grid of cells for the site vacancy probability `p` and creates a percolation flow
-from top to bottom. This makes those "open" cells through which the flow propagates "full". 
-The output can be visualized with grid image with different colors for "occupied", "empty" and "full" cells.
+from top to bottom. This makes "open" cells through which the flow propagates "full". 
+The output can be visualized by grid image with different colors for "occupied", "empty" and "full" cells.
 [Cairo graphics library](https://www.cairographics.org) is used for generation output images in .svg or .png format.
 
 
