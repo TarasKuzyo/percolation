@@ -52,7 +52,8 @@ and `pp` is site vacancy probability.
            site vacancy probability (mandatory)            
                                                      
        -o, --output                                  
-           output image file (either .png, .pdf or .svg format)     
+           output image file 
+           (either .png, .pdf or .svg format)     
                                                      
        -s, --size                                    
            maximum image size in pixels (in order to prevent 

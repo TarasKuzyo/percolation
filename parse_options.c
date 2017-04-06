@@ -10,50 +10,51 @@
 
 void parse_options(int argc, char **argv, cmd_args *args)
 {
-    static char *usage = "NAME                                                          \n"
-                         "       percolation - 2D site percolation                      \n"  
-                         "                                                              \n"
-                         "SYNOPSIS                                                      \n"
-                         "       percolation [OPTION]...                                \n"
-                         "                                                              \n"
-                         "DESCRIPTION                                                   \n"
-                         "       -w, --width                                            \n"
-                         "           grid width (mandatory)                             \n"
-                         "                                                              \n"
-                         "       -h, --height                                           \n"
-                         "           grid height (mandatory)                            \n"
-                         "                                                              \n"
-                         "       -p, --probability                                      \n"
-                         "           site vacancy probability (mandatory)               \n"
-                         "                                                              \n"
-                         "       -o, --output                                           \n"
-                         "           output image file (either .png or .svg format)     \n"
-                         "                                                              \n"
-                         "       -s, --size                                             \n"
-                         "           maximum image size in pixels (in order to prevent  \n"
-                         "           too large file generation for large grid sizes)    \n"
-                         "                                                              \n"
-                         "       -c, --color                                            \n"
-                         "           color for the full sites in form '#rrggbb'         \n"
-                         "           or as a predefined colors lookup table index       \n"                         
-                         "                                                              \n"
-                         "       -l, --list-colors                                      \n"
-                         "           dispalys a list of predefined colors and           \n"
-                         "           their indexes (an argument for -c option)          \n"
-                         "                                                              \n"
-                         "       -r, --recursive                                        \n"
-                         "           enable recursive flow propagation                  \n"
-                         "           (might cause stack overflow on large grids)        \n"
-                         "                                                              \n"  
-                         "       -O, --no-output                                        \n" 
-                         "           disable image output                               \n" 
-                         "                                                              \n"                        
-                         "       --help                                                 \n"
-                         "           display this help and exit                         \n" 
-                         "                                                              \n"
-                         "AUTHOR                                                        \n"  
-                         "       Written by Taras Kuzyo                                 \n"                         
-                         "                                                              \n";
+    static char *usage = "NAME                                                              \n"
+                         "       percolation - 2D site percolation                          \n"  
+                         "                                                                  \n"
+                         "SYNOPSIS                                                          \n"
+                         "       percolation [OPTION]...                                    \n"
+                         "                                                                  \n"
+                         "DESCRIPTION                                                       \n"
+                         "       -w, --width                                                \n"
+                         "           grid width (mandatory)                                 \n"
+                         "                                                                  \n"
+                         "       -h, --height                                               \n"
+                         "           grid height (mandatory)                                \n"
+                         "                                                                  \n"
+                         "       -p, --probability                                          \n"
+                         "           site vacancy probability (mandatory)                   \n"
+                         "                                                                  \n"
+                         "     -o, --output                                                 \n"
+                         "           output image file                                      \n"
+                         "           (either .png, .pdf or .svg format)                     \n"
+                         "                                                                  \n"
+                         "       -s, --size                                                 \n"
+                         "           maximum image size in pixels (in order to prevent      \n"
+                         "           too large file generation for large grid sizes)        \n"
+                         "                                                                  \n"
+                         "       -c, --color                                                \n"
+                         "           color for the full sites in form '#rrggbb'             \n"
+                         "           or as a predefined colors lookup table index           \n"                         
+                         "                                                                  \n"
+                         "       -l, --list-colors                                          \n"
+                         "           dispalys a list of predefined colors and               \n"
+                         "           their indexes (an argument for -c option)              \n"
+                         "                                                                  \n"
+                         "       -r, --recursive                                            \n"
+                         "           enable recursive flow propagation                      \n"
+                         "           (might cause stack overflow on large grids)            \n"
+                         "                                                                  \n"  
+                         "       -O, --no-output                                            \n" 
+                         "           disable image output                                   \n" 
+                         "                                                                  \n"                        
+                         "       --help                                                     \n"
+                         "           display this help and exit                             \n" 
+                         "                                                                  \n"
+                         "AUTHOR                                                            \n"  
+                         "       Written by Taras Kuzyo                                     \n"                         
+                         "                                                                  \n";
 
     
     static const struct option long_opts[] = {
@@ -157,7 +158,7 @@ void parse_options(int argc, char **argv, cmd_args *args)
                 break;
                 
             default:
-                printf("%s: unknown option '%s'\n", argv[0], optarg);
+                printf("%s: unknown option '%s'    \n", argv[0], optarg);
                 exit(1);
                 break;
         }
@@ -165,29 +166,29 @@ void parse_options(int argc, char **argv, cmd_args *args)
     /* check if required arguments were passed */
     if (!width_flag)
     {
-        printf("%s: missing '-w' option\n", argv[0]);
+        printf("%s: missing '-w' option    \n", argv[0]);
         exit(1);
     }
     if (!height_flag)
     {
-        printf("%s: missing '-h' option\n", argv[0]);
+        printf("%s: missing '-h' option    \n", argv[0]);
         exit(1);
     }
     if (!prob_flag)
     {
-        printf("%s: missing '-p' option\n", argv[0]);
+        printf("%s: missing '-p' option    \n", argv[0]);
         exit(1);
     }
     /* check probability range */
     if (prob < 0.0 || prob > 1.0)
     {
-        printf("%s: invalid probability value: %g\n", argv[0], prob);
+        printf("%s: invalid probability value: %g    \n", argv[0], prob);
         exit(1);
     }
     /* check if color index is valid */
     if (color < 0 || color - COLOR_PAD >= NUM_COLORS)
     {
-        printf("%s: unknown color code: %x\n", argv[0], (int)(color));
+        printf("%s: unknown color code: %x    \n", argv[0], (int)(color));
         exit(1);
     }
     
