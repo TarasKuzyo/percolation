@@ -3,6 +3,7 @@
 
 #include <cairo.h>
 #include <cairo-svg.h> 
+#include <cairo-pdf.h> 
 
 #include "definitions.h"
 #include "color_tools.h"
@@ -77,6 +78,8 @@ int create_image(const char *filename, grid *gd, double max_size, int cl)
     
   	if (strcmp(ext, "svg") == 0)
   	    surface = cairo_svg_surface_create(filename, img_width, img_height);
+  	else if (strcmp(ext, "pdf") == 0)
+        surface = cairo_pdf_surface_create(filename, img_width, img_height);
   	else if (strcmp(ext, "png") == 0)
         surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, img_width, img_height);
     else

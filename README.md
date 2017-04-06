@@ -18,7 +18,7 @@ and above which the probability is always 1. For 2D site percolation the critica
 The program generates a grid of cells for the site vacancy probability `p` and creates a percolation flow
 from top to bottom. This makes "open" cells through which the flow propagates "full". 
 The output can be visualized by grid image with different colors for "occupied", "empty" and "full" cells.
-[Cairo graphics library](https://www.cairographics.org) is used for generation output images in .svg or .png format.
+[Cairo graphics library](https://www.cairographics.org) is used for generation output images in .svg, .pdf or .png format.
 
 
 ### Compilation and usage
@@ -52,11 +52,11 @@ and `pp` is site vacancy probability.
            site vacancy probability (mandatory)            
                                                      
        -o, --output                                  
-           output image file (either .png or .svg format)     
+           output image file (either .png, .pdf or .svg format)     
                                                      
        -s, --size                                    
-           maximum image size (in order to prevent 
-           large file generation for large grid sizes)                      
+           maximum image size in pixels (in order to prevent 
+           too large file generation for large grid sizes)                      
                                                      
        -c, --color                                   
            color for the full sites in form '#rrggbb'
@@ -113,7 +113,7 @@ Run the flow on 400x200 grid with `p = 0.45` and fill percolated cells with cust
 * [x]     set color from command line
 * [x]     parse color ~~both as enum and int~~ as hex
 * [x]     make README more complrehensive
-* [ ]     add pdf output
+* [x]     add pdf output
 * [ ]     include borders to the max image size calculation
 
 
