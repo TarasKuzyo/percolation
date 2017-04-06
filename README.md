@@ -14,24 +14,27 @@ According to the theory there exists a critical `p` below which the probability 
 and above which the probability is always 1. For 2D site percolation the critical value of `p` is close to 0.6.
 
 The program generates a grid of cells for the site vacancy probability `p` and creates a percolation flow
-from top to bottom. The output can be visualized with grid image.
+from top to bottom. This makes those "open" cells through which the flow propagates "full". 
+The output can be visualized with grid image with different colors for "occupied", "empty" and "full" cells.
 [Cairo graphics library](https://www.cairographics.org) is used for generation .svg and .png output images.
 
 
 ### Compilation and usage
 
-Provided cairo is installed the project can be compiled with `makefile`
-which creates the `percolation` executable.
+Provided cairo is properly [installed](https://www.cairographics.org/download/) 
+the project can be compiled with `makefile` which creates the `percolation` executable.
 
 The program takes 3 mandatory command line arguments:
 * grid width
 * grid height
 * site vacancy probability (floating point value in 0..1 range). 
 
-Optionally one can set the output file paraneters (name, type, maximum image size) and color scheme used.
+Optionally one can set the output file paraneters (name and type, maximum image size) and color scheme used.
+The output image dimensions are proportional to the grid size, unless an upper limit of image sizes is set
+using `--size` option.
 
-By default the output is written to the .png image called `'output_ww_hh_pp.png'` with
-the maximum size of 800px where `ww` and `hh` are grid width and height respectfully, 
+By default the output is written to the .png file called `'output_ww_hh_pp.png'` with
+the maximum image size of 800px, where `ww` and `hh` are grid width and height respectfully, 
 and `pp` is site vacancy probability.
 
 
@@ -50,11 +53,12 @@ and `pp` is site vacancy probability.
            output image file (either .png or .svg format)     
                                                      
        -s, --size                                    
-           maximum image size (useful for large grids)                      
+           maximum image size (in order to prevent 
+           large file generation for large grid sizes)                      
                                                      
        -c, --color                                   
            color for the full sites in form '#rrggbb'
-           or as a lookup table index                
+           or as a predefined colors lookup table index                
                                                      
        -l, --list-colors                             
            dispalys a list of predefined colors and  
@@ -73,30 +77,32 @@ and `pp` is site vacancy probability.
 
 ### Sample runs
 
-./percolation -w 50 -h 50 -p 0.6 -o flow.svg
+Create a 50x50 grid with site vacancy probability `p = 0.6` and 
+save the output image in flow.svg using default color scheme.
 
-Create a 50x50 grid with site vacancy probability p = 0.6 and 
-save the output image in flow.svg
-
-
-./percolation -w 50 -h 50 -p 0.5 --recursive
-
-Run recursive propagation on 50x50 grid with p = 0.5
+`./percolation -w 50 -h 50 -p 0.6 -o flow.svg`
 
 
-./percolation --width 2048 --height 2048 --probability 0.65 --size 800 --output flow_large.png
+Run recursive flow propagation on 50x50 grid with `p = 0.5`.
+The output is written to 'output_50_50_0.5.png'
 
-Create 2048x2048 grid with p=0.65 and save the output to the image flow_large.png wit maximum size 800px
-
-
-./percolation -w 400 -h 200 -p 0.45 -c 2
-
-Run on 400x200 grid with p = 0.45 and fill percolated cells with custom from the colortable.
+`./percolation -w 50 -h 50 -p 0.5 --recursive`
 
 
-./percolation -w 400 -h 200 -p 0.45 -c #ff22ee
+Create 4096x4096 grid with `p = 0.65` and save the output to the image flow_large.png.
+The output image dimensions are limited to 1024px.
 
-Run on 400x200 grid with p = 0.45 and fill percolated cells with custom hex color.
+`./percolation --width 4096 --height 4096 --probability 0.65 --size 1024 --output flow_large.png`
+
+
+Run the flow on 400x200 grid with `p = 0.45` and fill percolated cells with custom color from the colortable.
+
+`./percolation -w 400 -h 200 -p 0.45 -c 2`
+
+
+Run the flow on 400x200 grid with `p = 0.45` and fill percolated cells with custom color in hex form.
+
+`./percolation -w 400 -h 200 -p 0.45 -c #ff22ee`
 
 
 ### TODO
@@ -104,8 +110,9 @@ Run on 400x200 grid with p = 0.45 and fill percolated cells with custom hex colo
 * [x]     add colors to color map
 * [x]     set color from command line
 * [x]     parse color ~~both as enum and int~~ as hex
-* [ ]     make README more complrehensive
+* [x]     make README more complrehensive
 * [ ]     add pdf output
+* [ ]     include borders to the max image size calculation
 
 
 ### Sample images
