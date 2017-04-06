@@ -5,32 +5,34 @@ The site percolation code on two dimensional grid
 ### Description
 
 The code implements [site percolation problem](https://en.wikipedia.org/wiki/Percolation_theory) 
-on 2D rectangular grid of cells (or "sites").
+on 2D rectangular grid of cells (or "sites"). 
 
-A site is "occupied" with probability p or "empty" with probability 1-p and they are assumed to be independent
-for all cells. The question of the problem is: 
-for a given p, what is the probability that an open path exists between top and bottom?
-According to the theory there exists a critical p (denoted by p_c) below which the probability is always 0 
-and above which the probability is always 1. For 2D site percolation the critical value of p is close to 0.6.
+A site is "occupied" with probability `p` or "empty" with probability `1 - p` and 
+those probabilities are assumed to be independent for all cells. The question of the problem is: 
+for a given `p`, what is the probability that an open path exists between top and bottom?
+According to the theory there exists a critical `p` below which the probability is always 0 
+and above which the probability is always 1. For 2D site percolation the critical value of `p` is close to 0.6.
 
-The program generates a grid of cells for the site vacancy probability p and creates a percolation flow
+The program generates a grid of cells for the site vacancy probability `p` and creates a percolation flow
 from top to bottom. The output can be visualized with grid image.
 [Cairo graphics library](https://www.cairographics.org) is used for generation .svg and .png output images.
 
 
 ### Compilation and usage
 
-Provided cairo is installed the project can be compiled with `make` command
-which creates `percolation` executable.
+Provided cairo is installed the project can be compiled with `makefile`
+which creates the `percolation` executable.
 
-The program takes 3 mandatory command line arguments -- grid width, grid height and
-site vacancy probability (floating point value in 0..1 range). Optionally one can
-set color scheme used, the output file paraneters (name, type, maximum size) or disable
-image output at all.
+The program takes 3 mandatory command line arguments:
+* grid width
+* grid height
+* site vacancy probability (floating point value in 0..1 range). 
 
-By default the output is written to the .png image called 'output_ww_hh_pp.png' with
-the maximum size 800px where ww and hh are grid width and height respectfully, pp is
-site vacancy probability.
+Optionally one can set the output file paraneters (name, type, maximum image size) and color scheme used.
+
+By default the output is written to the .png image called `'output_ww_hh_pp.png'` with
+the maximum size of 800px where `ww` and `hh` are grid width and height respectfully, 
+and `pp` is site vacancy probability.
 
 
 ### Command line options
