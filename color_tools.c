@@ -8,7 +8,7 @@ int colormap[NUM_COLORS] = {0xd53e4f, 0xf46d43, 0xfdae61,
 
 
 /* displays contents of the colormap array
-   both as hex and rgb colors 
+   both as hex values and rgb colors 
  */
 void colormap_show()
 {
@@ -55,6 +55,7 @@ int rgb_to_hex(rgb color)
 
 /* converts color string of form "#rrggbb"
    to its hex value
+   returns 1 on success and 0 on failure
  */
 int str_to_hex(char *str, int *hex)
 {

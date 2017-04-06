@@ -26,7 +26,7 @@ int** allocate_matrix(int width, int height)
 	    /* alocate memory for rows data */
 		if (( matrix[i] = malloc(width * sizeof(int)) ) == NULL)
 		{
-		    /* free already allocated part of matrix */
+		    /* free the part of matrix which is already allocated */
 			free_matrix(matrix, i); 
 			return NULL;
 		}
@@ -93,7 +93,7 @@ void write_grid(const char *filename, grid *gd)
     
     if ((fp = fopen(filename, "w")) == NULL) 
 	{
-        printf("Cannot open file '%s' to write\n", filename);
+        printf("Cannot open file '%s' to write.\n", filename);
 		return;
 	}
     

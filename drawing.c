@@ -16,7 +16,8 @@ void draw_site(cairo_t *cr, double x, double y, double size, int c, int site)
 {
     /* hex color value for the full site */
     /* if c is less than COLOR_PAD then it is 
-       valid RGB value otherwise pick hex value 
+       valid RGB value 
+       otherwise pick hex value 
        from lookup table using c as index shifted 
        by COLOR_PAD */
     int color = (c < COLOR_PAD) ? c : colormap[c - COLOR_PAD];
@@ -39,7 +40,7 @@ void draw_site(cairo_t *cr, double x, double y, double size, int c, int site)
 }
 
 
-/* Takes a filename of the output file, grid structure
+/* Takes a filename of the output file, a grid structure
    and maximum image size (width or height)
    Writes the grid image to the file
  */

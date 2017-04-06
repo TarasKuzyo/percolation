@@ -1,9 +1,9 @@
 #ifndef __COLOR_TOOLS_H__
 #define __COLOR_TOOLS_H__
 
-/* size of the lookup table */
+/* size of the colors lookup table */
 #define NUM_COLORS 8
-/* start of color indexes for some predefined colors */
+/* start of color indexes for a number of predefined colors */
 #define COLOR_PAD (0xffffff + 1)    
 
 /* default colors for open and block cells */
@@ -21,6 +21,7 @@ typedef struct {
 int colormap[NUM_COLORS];
 void colormap_show();
 
+/* conversion functions */
 rgb hex_to_rgb(int hex_val);
 int str_to_hex(char *color, int *hex_val);
 

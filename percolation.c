@@ -130,7 +130,7 @@ int check_neighbors(grid *gd, int i, int j)
 }
 
 
-/* Fills the structure with the flow in iterative way 
+/* Fills the structure with the flow in the iterative way 
    (keep propagating the flow using 4 diagonal-direction sweeps 
    until no cell has been updated updated on the previous step)
  */
@@ -169,6 +169,7 @@ void flow_iterative(grid *gd)
 
 /* generate random grid structure
    with given site vacancy probability
+   and propagate the flow downstream
  */
 int run_percolation(grid *gd, double prob, int recursive_flag)
 {
