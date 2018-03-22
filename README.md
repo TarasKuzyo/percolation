@@ -9,7 +9,7 @@ The site percolation code on two dimensional grid
 The code implements [site percolation problem](https://en.wikipedia.org/wiki/Percolation_theory) 
 on 2D rectangular grid of cells (or "sites").
 
-A site is "occupied" with probability `p` or "empty" with probability `1 - p`. 
+A site is "occupied" with the probability `p` or "empty" with the probability of `1 - p`. 
 Those probabilities are assumed to be independent for all cells. The question of the problem is: 
 for a given `p`, what is the probability that an open path exists between top and bottom?
 According to the theory there exists a critical value of `p` below which the percolation probability is always 0 
@@ -69,7 +69,11 @@ and `pp` is site vacancy probability.
                                                      
        -r, --recursive                               
            enable recursive flow propagation 
-           (might cause stack overflow on large grids)     
+           (might cause stack overflow on large grids) 
+           
+       -n  --numrepeats
+           the number of tries to calculate grid percolation 
+           probability for given site vacancy probability
                                                      
        -O, --no-output                               
            disable image output                      
@@ -103,9 +107,13 @@ Run the flow on 400x200 grid with `p = 0.45` and fill percolated cells with cust
 `./percolation -w 400 -h 200 -p 0.45 -c 2`
 
 
-Run the flow on 400x200 grid with `p = 0.45` and fill percolated cells with custom color in hex form.
+Run the flow on 400x200 grid with `p = 0.45` and fill percolated cells with custom color in hex format.
 
 `./percolation -w 400 -h 200 -p 0.45 -c #ff22ee`
+
+Run the flow 200 times on 100x100 grid with `p = 0.55`
+
+`./percolation -w 100 -h 100 -p 0.55 -n 200`
 
 
 ### TODO
