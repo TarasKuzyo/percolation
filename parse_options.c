@@ -26,7 +26,7 @@ void parse_options(int argc, char **argv, cmd_args *args)
                          "       -p, --probability                                          \n"
                          "           site vacancy probability (mandatory)                   \n"
                          "                                                                  \n"
-                         "     -o, --output                                                 \n"
+                         "       -o, --output                                               \n"
                          "           output image file                                      \n"
                          "           (either .png, .pdf or .svg format)                     \n"
                          "                                                                  \n"
@@ -76,7 +76,7 @@ void parse_options(int argc, char **argv, cmd_args *args)
     int long_index = 0;
     
     /* minimal values for some arguments */
-    const int min_width = 2, min_height = 2, min_size = 64;
+    const int min_width = 2, min_height = 2, min_size = 32;
     /* flags indicating option invocation */
     int width_flag = 0, height_flag = 0, prob_flag = 0;
     
@@ -186,7 +186,7 @@ void parse_options(int argc, char **argv, cmd_args *args)
         exit(1);
     }
     /* check if color index is valid */
-    if (color < 0 || color - COLOR_PAD >= NUM_COLORS)
+    if (color < 0 || color >= COLOR_PAD + NUM_COLORS)
     {
         printf("%s: unknown color code: %x    \n", argv[0], (int)(color));
         exit(1);

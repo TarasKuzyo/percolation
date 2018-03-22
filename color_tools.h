@@ -3,7 +3,7 @@
 
 /* size of the colors lookup table */
 #define NUM_COLORS 8
-/* start of color indexes for a number of predefined colors */
+/* start of color indexes for some predefined colors */
 #define COLOR_PAD (0xffffff + 1)    
 
 /* default colors for open and block cells */

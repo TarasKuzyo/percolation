@@ -23,7 +23,7 @@ void start_flow(grid *gd)
     
     for (j = 0; j < gd->width; j++)
         if (gd->cells[0][j] == SITE_OPEN)
-            gd->cells[0][j] = SITE_FULL;
+            gd->cells[0][j]  = SITE_FULL;
 
 }
 
