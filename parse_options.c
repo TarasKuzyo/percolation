@@ -27,7 +27,7 @@ void parse_options(int argc, char **argv, cmd_args *args)
                          "           site vacancy probability (mandatory)                   \n"
                          "                                                                  \n"
                          "       -o, --output                                               \n"
-                         "           output image file                                      \n"
+                         "           output image file name                                 \n"
                          "           (either .png, .pdf or .svg format)                     \n"
                          "                                                                  \n"
                          "       -s, --size                                                 \n"
@@ -45,7 +45,11 @@ void parse_options(int argc, char **argv, cmd_args *args)
                          "       -r, --recursive                                            \n"
                          "           enable recursive flow propagation                      \n"
                          "           (might cause stack overflow on large grids)            \n"
-                         "                                                                  \n"  
+                         "                                                                  \n"
+                         "       -n  --numrepeats                                           \n"
+                         "           the number of tries to calculate grid percolation      \n"
+                         "           probability for given site vacancy probability         \n" 
+                         "                                                                  \n"
                          "       -O, --no-output                                            \n" 
                          "           disable image output                                   \n" 
                          "                                                                  \n"                        
@@ -61,6 +65,7 @@ void parse_options(int argc, char **argv, cmd_args *args)
                         { "width",       required_argument, NULL, 'w' }, 
                         { "height",      required_argument, NULL, 'h' },    
                         { "probability", required_argument, NULL, 'p' },
+                        { "numrepeats",  required_argument, NULL, 'n' },
                         { "output",      required_argument, NULL, 'o' },       
                         { "size",        required_argument, NULL, 's' },
                         { "color",       required_argument, NULL, 'c' },
@@ -70,7 +75,7 @@ void parse_options(int argc, char **argv, cmd_args *args)
                         { "help",        no_argument,       NULL,  0  },
                         {  NULL,         no_argument,       NULL,  0  }  };
             
-    char *options = "w:h:p:p:o:s:c:lrO";
+    char *options = "w:h:p:n:o:s:c:lrO";
 
     int opt = 0;
     int long_index = 0;
@@ -83,7 +88,7 @@ void parse_options(int argc, char **argv, cmd_args *args)
     /* default values for the arguments */
     int recursive_flag = 0;
     int img_output = 1;
-    int width = 0, height = 0;
+    int width = 0, height = 0, n = 1;
     double prob = 0.0, size = 800.0;    
     char filename[STR_BUF_SIZE] = "";
     int color = COLOR_PAD;
@@ -144,6 +149,10 @@ void parse_options(int argc, char **argv, cmd_args *args)
                 recursive_flag = 1;
                 break;
                 
+            case 'n':
+                n = atoi(optarg);
+                break;
+                
             case 'O':
                 img_output = 0;
                 break;
@@ -185,6 +194,12 @@ void parse_options(int argc, char **argv, cmd_args *args)
         printf("%s: invalid probability value: %g    \n", argv[0], prob);
         exit(1);
     }
+    if (n <= 0)
+    {
+        printf("%s: the number of repeats should be positive.\n", argv[0]);
+        exit(1);
+    }
+    
     /* check if color index is valid */
     if (color < 0 || color >= COLOR_PAD + NUM_COLORS)
     {
@@ -203,6 +218,7 @@ void parse_options(int argc, char **argv, cmd_args *args)
     args->width      = width;
     args->height     = height;
     args->prob       = prob;
+    args->numrepeats = n;
     args->size       = size;
     args->color      = color;
     args->img_output = img_output;

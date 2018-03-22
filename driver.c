@@ -15,14 +15,20 @@ int main(int argc, char **argv)
     
     grid *gd = allocate_grid(args.width, args.height);
     
+    int count = 0;
+    
     beg = clock();
-    run_percolation(gd, args.prob, args.recursive);
+    for (int i = 0; i < args.numrepeats; i++)
+    {
+        count = count + run_percolation(gd, args.prob, args.recursive);
+    }
     end = clock();
     
     if (args.img_output)
         create_image(args.filename, gd, args.size, args.color);
     
     printf("Finished in %g sec\n", (double)(end - beg) / CLOCKS_PER_SEC);
+    printf("Percolation probability is: %g\n", count / (double)args.numrepeats);
 
     free_grid(gd);
     

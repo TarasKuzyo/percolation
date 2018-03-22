@@ -21,6 +21,7 @@ typedef struct
 {
     int width;
     int height;
+    int numrepeats;
     int recursive;
     int img_output;
     int color;
