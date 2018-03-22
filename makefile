@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-c -Wall -O2 `pkg-config --cflags cairo`
+CFLAGS=-c -Wall -std=c99 -O2 `pkg-config --cflags cairo`
 LDFLAGS=-lm -export-dynamic `pkg-config --libs cairo`
 HEADERS=$(wildcard *.h)
 SOURCES=$(wildcard *.c)
