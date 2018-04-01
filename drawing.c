@@ -45,7 +45,7 @@ void draw_site(cairo_t *cr, double x, double y, double size, int c, int site)
    and maximum image size (width or height)
    Writes the grid image to the file
  */
-int create_image(const char *filename, grid *gd, double max_size, int cl)
+int create_image(const char *filename, int filenum, int total_images, grid *gd, double max_size, int cl)
 {
     int i, j; 
     
@@ -75,6 +75,9 @@ int create_image(const char *filename, grid *gd, double max_size, int cl)
     }
     else
         ext = ext + 1;
+        
+    // basename = strtok(filename, ".");
+    // sprintf("%s_%%0%dd.%s", basename, total_images, ext)
     
   	if (strcmp(ext, "svg") == 0)
   	    surface = cairo_svg_surface_create(filename, img_width, img_height);

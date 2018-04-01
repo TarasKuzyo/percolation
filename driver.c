@@ -25,7 +25,7 @@ int main(int argc, char **argv)
     end = clock();
     
     if (args.img_output)
-        create_image(args.filename, gd, args.size, args.color);
+        create_image(args.filename, 0, 1, gd, args.size, args.color);
     
     printf("Finished in %g sec\n", (double)(end - beg) / CLOCKS_PER_SEC);
     printf("Percolation probability is: %g\n", count / (double)args.numrepeats);

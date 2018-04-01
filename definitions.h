@@ -40,7 +40,7 @@ void write_grid(const char *filename, grid *gd);
 int run_percolation(grid *gd, double prob, int recursive_flag);
 
 /* from drawing.c */
-int create_image(const char *filename, grid *gd, double max_size, int cl);
+int create_image(const char *filename, int filenum, int total_images, grid *gd, double max_size, int cl);
 
 /* from parse_options.c */
 void parse_options(int argc, char **argv, cmd_args *args);
