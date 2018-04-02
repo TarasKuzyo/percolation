@@ -21,11 +21,10 @@ int main(int argc, char **argv)
     for (int i = 0; i < args.numrepeats; i++)
     {
         count = count + run_percolation(gd, args.prob, args.recursive);
+        if (args.img_output)
+            create_image(args.filename, i, args.numrepeats, gd, args.size, args.color);
     }
     end = clock();
-    
-    if (args.img_output)
-        create_image(args.filename, 0, 1, gd, args.size, args.color);
     
     printf("Finished in %g sec\n", (double)(end - beg) / CLOCKS_PER_SEC);
     printf("Percolation probability is: %g\n", count / (double)args.numrepeats);

@@ -48,7 +48,7 @@ void draw_site(cairo_t *cr, double x, double y, double size, int c, int site)
 int create_image(const char *filename, int filenum, int total_images, grid *gd, double max_size, int cl)
 {
     int i, j; 
-    
+    char output_name[STR_BUF_SIZE] = {0}, basename[STR_BUF_SIZE] = {0};
     /* grid structure aspect ratio */
     double aspect = (double)gd->width / (double)gd->height;
     /* image parameters */
@@ -66,7 +66,7 @@ int create_image(const char *filename, int filenum, int total_images, grid *gd, 
     cairo_surface_t *surface;
   	cairo_t *cr;
   	
-  	/* extract an extension from filename */
+  	/* the last occurence of '.' */
   	char *ext = strrchr(filename, '.');
     if (!ext) /* no extension */
     {
@@ -75,14 +75,22 @@ int create_image(const char *filename, int filenum, int total_images, grid *gd, 
     }
     else
         ext = ext + 1;
-        
-    // basename = strtok(filename, ".");
-    // sprintf("%s_%%0%dd.%s", basename, total_images, ext)
+    
+    if (total_images > 1)
+    {
+        int padding = num_digits(total_images);
+        strncpy(basename, filename, strlen(filename) - strlen(ext) - 1);
+        sprintf(output_name, "%s_%0*d.%s", basename, padding, filenum, ext);
+    }
+    else
+    {
+        strcpy(output_name, filename);
+    }
     
   	if (strcmp(ext, "svg") == 0)
-  	    surface = cairo_svg_surface_create(filename, img_width, img_height);
+  	    surface = cairo_svg_surface_create(output_name, img_width, img_height);
   	else if (strcmp(ext, "pdf") == 0)
-        surface = cairo_pdf_surface_create(filename, img_width, img_height);
+        surface = cairo_pdf_surface_create(output_name, img_width, img_height);
   	else if (strcmp(ext, "png") == 0)
         surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, img_width, img_height);
     else
@@ -110,7 +118,7 @@ int create_image(const char *filename, int filenum, int total_images, grid *gd, 
                           site_size, cl, gd->cells[i][j]);          
     
     if (strcmp(ext, "png") == 0)
-        cairo_surface_write_to_png(surface, filename);
+        cairo_surface_write_to_png(surface, output_name);
     
     cairo_destroy(cr);
 	cairo_surface_destroy(surface);

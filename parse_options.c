@@ -213,7 +213,9 @@ void parse_options(int argc, char **argv, cmd_args *args)
     
     /* set default image filename */
     if (strlen(filename) == 0)
-        snprintf(filename, STR_BUF_SIZE, "output_%d_%d_%g.png", width, height, prob);
+    {
+        snprintf(filename, STR_BUF_SIZE, "output-%d-%d-%g.png", width, height, prob);
+    }
         
     args->width      = width;
     args->height     = height;
