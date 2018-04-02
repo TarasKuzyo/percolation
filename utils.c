@@ -109,3 +109,17 @@ void write_grid(const char *filename, grid *gd)
 }
 
 
+/* returns the number of digits in n
+ */
+int num_digits(int n) 
+{
+    int r = 1;
+    while (n > 9) 
+    {
+        n /= 10;
+        r++;
+    }
+    return r;
+}
+
+

@@ -35,6 +35,7 @@ typedef struct
 grid* allocate_grid(int width, int height);
 void free_grid(grid *gd);
 void write_grid(const char *filename, grid *gd);
+int num_digits(int n);
 
 /* from percolation.c */
 int run_percolation(grid *gd, double prob, int recursive_flag);
